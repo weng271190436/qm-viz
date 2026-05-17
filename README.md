@@ -17,6 +17,7 @@ pip install -r requirements.txt
 | Script | Griffiths Section | What It Shows |
 |--------|-------------------|---------------|
 | `finite_well_1d.py` | §2.6 | Finite square well: bound states, wavefunctions, transcendental equation |
+| `harmonic_oscillator_1d.py` | §2.3 | Harmonic oscillator: Hermite polynomials, equal spacing, correspondence principle |
 
 ## Resources
 
