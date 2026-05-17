@@ -114,7 +114,7 @@ def find_bound_states(V0, a, num_points=1000):
     return energies, parities, z0
 
 
-def compute_wavefunction(E, V0, a, x):
+def compute_wavefunction(E, V0, a, x, parity='even'):
     """Compute the normalized wavefunction for a given energy.
     
     Inside well:  psi = A*cos(kx) (even) or A*sin(kx) (odd)
@@ -129,19 +129,12 @@ def compute_wavefunction(E, V0, a, x):
     outside_right = x > a
     outside_left = x < -a
     
-    # Determine parity from k*a
-    # Even: cos(ka) > 0 at boundary, Odd: sin(ka) != 0
-    cos_ka = np.cos(k * a)
-    sin_ka = np.sin(k * a)
-    
-    if abs(cos_ka) > abs(sin_ka):
-        # Even solution
+    if parity == 'even':
         psi[inside] = np.cos(k * x[inside])
         B = np.cos(k * a) * np.exp(kappa * a)
         psi[outside_right] = B * np.exp(-kappa * x[outside_right])
         psi[outside_left] = B * np.exp(kappa * x[outside_left])
     else:
-        # Odd solution
         psi[inside] = np.sin(k * x[inside])
         B = np.sin(k * a) * np.exp(kappa * a)
         psi[outside_right] = B * np.exp(-kappa * x[outside_right])
@@ -190,7 +183,7 @@ def plot_well_and_states(V0, a, energies, parities, z0):
     
     # --- Right panel: Wavefunctions ---
     for i, (E, parity) in enumerate(zip(energies, parities)):
-        psi = compute_wavefunction(E, V0, a, x)
+        psi = compute_wavefunction(E, V0, a, x, parity)
         
         # Offset wavefunction by energy level for visualization
         scale = V0 * 0.15  # scale factor for wavefunction display
