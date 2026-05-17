@@ -7,7 +7,9 @@ Scripts for learning QM alongside Griffiths' *Introduction to Quantum Mechanics*
 ## Setup
 
 ```bash
-pip install numpy matplotlib scipy
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
 ```
 
 ## Scripts
